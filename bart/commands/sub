@@ -1,0 +1,22 @@
+#!/bin/bash
+set -e
+
+if [ ! -f ${BART_TOOLBOX_PATH}/bart ] ; then
+
+	if [ -f ${TOOLBOX_PATH}/bart ] ; then
+		BART_TOOLBOX_PATH=${TOOLBOX_PATH}
+	else
+		echo "\$BART_TOOLBOX_PATH is not set correctly!"
+		exit 1
+	fi
+fi
+
+if [ $# -lt 3 ] ; then
+
+	echo "Usage: $0 <input1> <input2> <output>" >&2
+	echo "Subtract <input1> from <input2> and save in <output>" >&2
+	exit 1
+fi
+
+${BART_TOOLBOX_PATH}/bart saxpy -- -1. $1 $2 $3
+
